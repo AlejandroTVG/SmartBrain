@@ -8,7 +8,7 @@ export default function ImageLinkForm({ onImageURLChange, onButtonSubmit }) {
         {"This magic brain will detect faces in your images! Give it a try."}
       </p>
       <div className="center">
-        <div className="center pa3 br3 shadow-5 form w-60">
+        <div className="center pa3 br3 shadow-5 form w-80">
           <input
             className="f4 pa2 w-70 center"
             type="text"

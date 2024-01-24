@@ -12,6 +12,7 @@ function App() {
     "https://img.freepik.com/foto-gratis/vista-frontal-retrato-joven-bella-mujer-despues-spa_176420-8732.jpg?w=1380&t=st=1706072715~exp=1706073315~hmac=ed2280004a93b4dbbf211aae8385020761e6083b51ddc850dcf8815e2fa1863f"
   );
   const [boundingBox, setboundingBox] = useState("");
+  let [rankCounter, setrankCounter] = useState(0);
 
   const onImageURLChange = (event) => {
     setImageURL(event.target.value);
@@ -76,6 +77,7 @@ function App() {
       .then((response) => response.json())
       .then((result) => {
         const regions = result.outputs[0].data.regions;
+        setrankCounter(rankCounter + 1);
 
         regions.forEach((region) => {
           // Accessing and rounding the bounding box values
@@ -89,7 +91,7 @@ function App() {
     <div className="App">
       <Navigation />
       <Logo />
-      <Rank />
+      <Rank rankCounter={rankCounter} />
       <ImageLinkForm
         onImageURLChange={onImageURLChange}
         onButtonSubmit={onButtonSubmit}
