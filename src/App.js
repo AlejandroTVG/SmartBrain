@@ -95,7 +95,7 @@ function App() {
         onButtonSubmit={onButtonSubmit}
       />
       <FaceRecognition imageURL={imageURL} boundingBox={boundingBox} />
-      <ParticlesBg type="circle" bg={true} num={200} color="white" />
+      <ParticlesBg type="circle" bg={true} num={200} />
     </div>
   );
 }
