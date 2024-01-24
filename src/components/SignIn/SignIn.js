@@ -1,4 +1,5 @@
 import React from "react";
+import "./SignIn.css";
 
 export default function SignIn({
   onSignInClick,
@@ -12,7 +13,8 @@ export default function SignIn({
       <div>
         <main className="pa4 black-80">
           <div
-            className="measure center w-30 ba pa4 shadow-5"
+            className="measure center w-30 ba pa4 shadow-5 bg-near-transparent
+            "
             style={{
               display: "flex",
               flexDirection: "column",
@@ -69,7 +71,7 @@ export default function SignIn({
       <div>
         <main className="pa4 black-80">
           <div
-            className="measure center w-30 ba pa4 shadow-5"
+            className="measure center w-30 ba pa4 shadow-5 bg-near-transparent"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -119,7 +121,7 @@ export default function SignIn({
             </fieldset>
             <div className="">
               <input
-                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib white"
+                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Register and SIGN IN!"
                 onClick={onRegisterSignInClick}
