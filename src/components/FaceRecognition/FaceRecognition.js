@@ -2,7 +2,7 @@ import React from "react";
 import "./FaceRecognition.css";
 
 export default function FaceRecognition({ imageURL, boundingBox }) {
-  console.log(boundingBox);
+  // console.log(boundingBox);
   return (
     <div className="center ma">
       <div className="absolute mt2">

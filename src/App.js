@@ -8,7 +8,9 @@ import { useState } from "react";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 
 function App() {
-  const [imageURL, setImageURL] = useState("");
+  const [imageURL, setImageURL] = useState(
+    "https://img.freepik.com/foto-gratis/vista-frontal-retrato-joven-bella-mujer-despues-spa_176420-8732.jpg?w=1380&t=st=1706072715~exp=1706073315~hmac=ed2280004a93b4dbbf211aae8385020761e6083b51ddc850dcf8815e2fa1863f"
+  );
   const [boundingBox, setboundingBox] = useState("");
 
   const onImageURLChange = (event) => {
@@ -93,7 +95,7 @@ function App() {
         onButtonSubmit={onButtonSubmit}
       />
       <FaceRecognition imageURL={imageURL} boundingBox={boundingBox} />
-      <ParticlesBg type="cobweb" bg={true} num={200} color="white" />
+      <ParticlesBg type="circle" bg={true} num={200} color="white" />
     </div>
   );
 }
