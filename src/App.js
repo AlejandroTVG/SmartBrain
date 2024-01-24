@@ -6,6 +6,7 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import ParticlesBg from "particles-bg";
 import { useState } from "react";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
+import SignIn from "./components/SignIn/SignIn";
 
 function App() {
   const [imageURL, setImageURL] = useState(
@@ -13,6 +14,9 @@ function App() {
   );
   const [boundingBox, setboundingBox] = useState("");
   let [rankCounter, setrankCounter] = useState(0);
+  const [signedIn, setSignedIn] = useState(false);
+  const [currentPage, setCurrentPage] = useState("signInPage");
+  const [name, setName] = useState("User");
 
   const onImageURLChange = (event) => {
     setImageURL(event.target.value);
@@ -87,17 +91,53 @@ function App() {
       .catch((error) => console.log("error", error));
   };
 
+  const onSignInClick = () => {
+    signedIn ? setSignedIn(false) : setSignedIn(true);
+    console.log(signedIn);
+    setCurrentPage("signInPage");
+  };
+
+  const onNavSignInClick = () => {
+    setCurrentPage("signInPage");
+  };
+
+  const onRegisterClick = () => {
+    setCurrentPage("registerPage");
+  };
+
+  const onRegisterSignInClick = () => {
+    setCurrentPage("registerPage");
+    signedIn ? setSignedIn(false) : setSignedIn(true);
+  };
+
   return (
     <div className="App">
-      <Navigation />
-      <Logo />
-      <Rank rankCounter={rankCounter} />
-      <ImageLinkForm
-        onImageURLChange={onImageURLChange}
-        onButtonSubmit={onButtonSubmit}
+      <Navigation
+        onNavSignInClick={onNavSignInClick}
+        onSignInClick={onSignInClick}
+        signedIn={signedIn}
+        onRegisterClick={onRegisterClick}
       />
-      <FaceRecognition imageURL={imageURL} boundingBox={boundingBox} />
-      <ParticlesBg type="circle" bg={true} num={200} />
+      {signedIn ? (
+        <div>
+          {" "}
+          <Logo />
+          <Rank rankCounter={rankCounter} />
+          <ImageLinkForm
+            onImageURLChange={onImageURLChange}
+            onButtonSubmit={onButtonSubmit}
+          />
+          <FaceRecognition imageURL={imageURL} boundingBox={boundingBox} />
+        </div>
+      ) : (
+        <SignIn
+          onSignInClick={onSignInClick}
+          onRegisterClick={onRegisterClick}
+          currentPage={currentPage}
+          onRegisterSignInClick={onRegisterSignInClick}
+        />
+      )}
+      <ParticlesBg type="circle" bg={true} num={200} />{" "}
     </div>
   );
 }
