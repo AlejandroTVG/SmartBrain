@@ -1,0 +1,10 @@
+.style {
+  display: flex;
+  padding: 0.5rem;
+  height: 10rem;
+  width: 10rem;
+  background-image: url(brain.png);
+  background: linear-gradient(135deg, #3e4f7e 0%, #5e6969 50%, #ffffff 100%);
+  justify-content: center;
+  align-items: center;
+}
