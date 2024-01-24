@@ -13,7 +13,7 @@ export default function SignIn({
       <div>
         <main className="pa4 black-80">
           <div
-            className="measure center w-30 ba pa4 shadow-5 bg-near-transparent
+            className="measure center ba pa4 shadow-5 bg-near-transparent
             "
             style={{
               display: "flex",
@@ -71,7 +71,7 @@ export default function SignIn({
       <div>
         <main className="pa4 black-80">
           <div
-            className="measure center w-30 ba pa4 shadow-5 bg-near-transparent"
+            className="measure center ba pa4 shadow-5 bg-near-transparent"
             style={{
               display: "flex",
               flexDirection: "column",
