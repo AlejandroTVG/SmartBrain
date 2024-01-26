@@ -1,9 +1,8 @@
 import React from "react";
 
-export default function Rank({ rankCounter }) {
-  const user = "Alejo";
+export default function Rank({ rankCounter, user }) {
   let currentRank = rankCounter;
   return (
-    <div className="white f2 pa3">{`${user}, your current rank is: ${currentRank}!`}</div>
+    <div className="white f2 pa3">{`${user.name}, your current rank is: ${currentRank}!`}</div>
   );
 }

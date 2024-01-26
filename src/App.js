@@ -13,10 +13,33 @@ function App() {
     "https://img.freepik.com/foto-gratis/vista-frontal-retrato-joven-bella-mujer-despues-spa_176420-8732.jpg?w=1380&t=st=1706072715~exp=1706073315~hmac=ed2280004a93b4dbbf211aae8385020761e6083b51ddc850dcf8815e2fa1863f"
   );
   const [boundingBox, setboundingBox] = useState("");
-  let [rankCounter, setrankCounter] = useState(0);
   const [signedIn, setSignedIn] = useState(false);
   const [currentPage, setCurrentPage] = useState("signInPage");
-  const [name, setName] = useState("User");
+  const [user, setUser] = useState({
+    id: "",
+    name: "",
+    email: "",
+    password: "",
+    entries: 0,
+    joined: "",
+  });
+  let [rankCounter, setrankCounter] = useState(0);
+
+  const onCount = () => {
+    fetch("http://localhost:3000/image", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: user.email,
+      }),
+    })
+      .then((response) => response.json())
+      .then((count) => setrankCounter(count));
+  };
+
+  const onUserSubmit = (userData) => {
+    setUser(userData);
+  };
 
   const onImageURLChange = (event) => {
     setImageURL(event.target.value);
@@ -81,7 +104,7 @@ function App() {
       .then((response) => response.json())
       .then((result) => {
         const regions = result.outputs[0].data.regions;
-        setrankCounter(rankCounter + 1);
+        onCount();
 
         regions.forEach((region) => {
           // Accessing and rounding the bounding box values
@@ -95,6 +118,7 @@ function App() {
     signedIn ? setSignedIn(false) : setSignedIn(true);
     console.log(signedIn);
     setCurrentPage("signInPage");
+    console.log(user.entries);
   };
 
   const onNavSignInClick = () => {
@@ -122,7 +146,7 @@ function App() {
         <div>
           {" "}
           <Logo />
-          <Rank rankCounter={rankCounter} />
+          <Rank rankCounter={rankCounter} user={user} />
           <ImageLinkForm
             onImageURLChange={onImageURLChange}
             onButtonSubmit={onButtonSubmit}
@@ -135,6 +159,7 @@ function App() {
           onRegisterClick={onRegisterClick}
           currentPage={currentPage}
           onRegisterSignInClick={onRegisterSignInClick}
+          onUserSubmit={onUserSubmit}
         />
       )}
       <ParticlesBg type="circle" bg={true} num={200} />{" "}

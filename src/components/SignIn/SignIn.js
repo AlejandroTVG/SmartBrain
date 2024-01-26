@@ -1,13 +1,64 @@
 import React from "react";
 import "./SignIn.css";
+import { useState } from "react";
 
 export default function SignIn({
   onSignInClick,
   onRegisterClick,
   currentPage,
   onRegisterSignInClick,
+  onUserSubmit,
 }) {
-  console.log(currentPage);
+  const [signInEmail, setSignInEmail] = useState("");
+  const [signInPassword, setSignInPassword] = useState("");
+  const [signInName, setSignInName] = useState("");
+
+  const onEmailChange = (event) => {
+    setSignInEmail(event.target.value);
+  };
+
+  const onPasswordChange = (event) => {
+    setSignInPassword(event.target.value);
+  };
+
+  const onNameChange = (event) => {
+    setSignInName(event.target.value);
+  };
+
+  const sendSignIn = () => {
+    console.log(signInEmail, signInPassword);
+    fetch("http://localhost:3000/signin", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: signInEmail,
+        password: signInPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.password === signInPassword) {
+          onSignInClick();
+          onUserSubmit(result);
+          console.log(result);
+        }
+      });
+  };
+
+  const sendRegister = () => {
+    console.log(signInEmail, signInPassword);
+    fetch("http://localhost:3000/register", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: signInEmail,
+        password: signInPassword,
+        name: signInName,
+      }),
+    });
+    onRegisterSignInClick();
+  };
+
   if (currentPage === "signInPage") {
     return (
       <div>
@@ -37,6 +88,7 @@ export default function SignIn({
                   type="email"
                   name="email-address"
                   id="email-address"
+                  onChange={onEmailChange}
                 />
               </div>
               <div className="mv3">
@@ -48,6 +100,7 @@ export default function SignIn({
                   type="password"
                   name="password"
                   id="password"
+                  onChange={onPasswordChange}
                 />
               </div>
             </fieldset>
@@ -56,7 +109,8 @@ export default function SignIn({
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Sign in"
-                onClick={onSignInClick}
+                // onClick={onSignInClick}
+                onClick={sendSignIn}
               />
             </div>
             <div className="lh-copy mt3" onClick={onRegisterClick}>
@@ -94,6 +148,7 @@ export default function SignIn({
                   type="text"
                   name="name"
                   id="name"
+                  onChange={onNameChange}
                 />
               </div>
               <div className="mt3">
@@ -105,6 +160,7 @@ export default function SignIn({
                   type="email"
                   name="email-address"
                   id="email-address"
+                  onChange={onEmailChange}
                 />
               </div>
               <div className="mv3">
@@ -116,6 +172,7 @@ export default function SignIn({
                   type="password"
                   name="password"
                   id="password"
+                  onChange={onPasswordChange}
                 />
               </div>
             </fieldset>
@@ -124,7 +181,7 @@ export default function SignIn({
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Register and SIGN IN!"
-                onClick={onRegisterSignInClick}
+                onClick={sendRegister}
               />
             </div>
           </div>
