@@ -26,7 +26,7 @@ export default function SignIn({
   };
 
   const sendSignIn = () => {
-    console.log(signInEmail, signInPassword);
+    // console.log(signInEmail, signInPassword);
     fetch("http://localhost:3000/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -40,13 +40,13 @@ export default function SignIn({
         if (result.email === signInEmail) {
           onSignInClick();
           onUserSubmit(result);
-          console.log(result);
+          // console.log(result);
         }
       });
   };
 
   const sendRegister = () => {
-    console.log(signInEmail, signInPassword);
+    // console.log(signInEmail, signInPassword);
     fetch("http://localhost:3000/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -57,8 +57,12 @@ export default function SignIn({
       }),
     })
       .then((response) => response.json())
-      .then((result) => onUserSubmit(result));
-    onRegisterSignInClick();
+      .then((result) => {
+        if (result.email === signInEmail) {
+          onUserSubmit(result);
+          onRegisterSignInClick();
+        }
+      });
   };
 
   if (currentPage === "signInPage") {

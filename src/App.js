@@ -51,7 +51,7 @@ function App() {
     const image = document.getElementById("inputimage");
     const width = Number(image.width);
     const height = Number(image.height);
-    console.log(width, height);
+    // console.log(width, height);
     setboundingBox({
       leftCol: data.left_col * width,
       topRow: data.top_row * height,
@@ -108,7 +108,6 @@ function App() {
         onCount();
 
         regions.forEach((region) => {
-          // Accessing and rounding the bounding box values
           detectFace(region.region_info.bounding_box);
         });
       })
@@ -117,9 +116,9 @@ function App() {
 
   const onSignInClick = () => {
     signedIn ? setSignedIn(false) : setSignedIn(true);
-    console.log(signedIn);
+    // console.log(signedIn);
     setCurrentPage("signInPage");
-    console.log(user.entries);
+    // console.log(user.entries);
   };
 
   const onNavSignInClick = () => {
