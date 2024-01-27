@@ -37,7 +37,7 @@ export default function SignIn({
     })
       .then((response) => response.json())
       .then((result) => {
-        if (result.password === signInPassword) {
+        if (result.email === signInEmail) {
           onSignInClick();
           onUserSubmit(result);
           console.log(result);

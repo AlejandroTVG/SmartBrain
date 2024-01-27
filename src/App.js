@@ -39,6 +39,7 @@ function App() {
 
   const onUserSubmit = (userData) => {
     setUser(userData);
+    setrankCounter(userData.entries);
   };
 
   const onImageURLChange = (event) => {
